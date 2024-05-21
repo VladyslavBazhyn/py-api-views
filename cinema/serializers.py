@@ -5,8 +5,14 @@ from cinema.models import Movie, Actor, Genre, CinemaHall
 
 class MovieSerializer(serializers.Serializer):
 
-    actors = serializers.ListField(child=serializers.IntegerField(), read_only=True)
-    genres = serializers.ListField(child=serializers.IntegerField(), read_only=True)
+    actors = serializers.ListField(
+        child=serializers.IntegerField(),
+        read_only=True
+    )
+    genres = serializers.ListField(
+        child=serializers.IntegerField(),
+        read_only=True
+    )
 
     class Meta:
         model = Movie
@@ -23,11 +29,17 @@ class MovieSerializer(serializers.Serializer):
         return Movie.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.title = validated_data.get("title", instance.title)
+        instance.title = validated_data.get(
+            "title",
+            instance.title
+        )
         instance.description = validated_data.get(
             "description", instance.description
         )
-        instance.duration = validated_data.get("duration", instance.duration)
+        instance.duration = validated_data.get(
+            "duration",
+            instance.duration
+        )
 
         instance.save()
 
@@ -43,9 +55,13 @@ class ActorSerializer(serializers.Serializer):
         return Actor.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.first_name = validated_data.get("first_name", instance.first_name)
+        instance.first_name = validated_data.get(
+            "first_name",
+            instance.first_name
+        )
         instance.last_name = validated_data.get(
-            "last_name", instance.last_name
+            "last_name",
+            instance.last_name
         )
 
         instance.save()
